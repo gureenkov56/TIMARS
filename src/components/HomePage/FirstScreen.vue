@@ -42,9 +42,9 @@
                 <div class="timer__counter">1:05:35</div>
               </div>
               <div class="timer three">
-              <div class="timer__name">Отдых</div>
-              <div class="timer__counter">1:34:27</div>
-            </div>
+                <div class="timer__name">Отдых</div>
+                <div class="timer__counter">1:34:27</div>
+              </div>
             </div>
           </div>
           <img src="img/mobile.png" alt="desktop">
@@ -57,9 +57,7 @@
 <script>
 export default {
   name: "FirstScreen",
-  data: () => ({
-
-  }),
+  data: () => ({}),
 }
 </script>
 
@@ -118,9 +116,11 @@ export default {
           &.one {
             background-color: $capri;
           }
+
           &.two {
             background-color: $amethyst;
           }
+
           &.three {
             background-color: $minion-yellow;
           }
@@ -157,6 +157,10 @@ export default {
           @media (max-width: 360px) {
             left: 20%;
           }
+          @media (max-width: $breakpoint-middle) {
+            flex-direction: column;
+            padding: 2rem;
+          }
           background-color: #fff;
           position: absolute;
           padding: 4rem;
@@ -172,6 +176,10 @@ export default {
             height: 170px;
             width: 170px;
             padding: 1rem;
+            @media (max-width: $breakpoint-middle) {
+              height: 100px;
+              width: 100px;
+            }
 
             &__name {
               font-size: 20px;
@@ -219,15 +227,23 @@ export default {
             flex-wrap: wrap;
             gap: .6rem;
             height: 180px;
+            @media (max-width: $breakpoint-middle) {
+              flex-direction: column;
+            }
+
             .timer {
               height: 70px;
               padding: 5px;
               flex: 1;
+
               &__name {
                 font-size: 12px;
                 margin-left: 5px;
               }
+
               &__counter {
+                margin-top: .5rem;
+                margin-bottom: .5rem;
                 font-size: .9rem;
               }
             }

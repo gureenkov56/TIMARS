@@ -31,9 +31,8 @@
 //  src: url('assets/fonts/Righteous/Righteous-Regular.ttf')  format('truetype');
 //}
 
-/* for Safari */
 html, body {
-  overflow-x: hidden;
+  //overflow-x: hidden;
   position: relative;
   width: 100vw;
   height: 100%;
