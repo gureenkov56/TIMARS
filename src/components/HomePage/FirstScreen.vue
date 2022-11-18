@@ -13,22 +13,53 @@
       </div>
       <div class="images">
         <div class="images__desktop">
-          <div class="content"></div>
+          <div class="content">
+            <div class="timer one">
+              <div class="timer__name">Проекты</div>
+              <div class="timer__counter">3:55:24</div>
+            </div>
+            <div class="timer two">
+              <div class="timer__name">Спорт</div>
+              <div class="timer__counter">1:05:35</div>
+            </div>
+            <div class="timer three">
+              <div class="timer__name">Отдых</div>
+              <div class="timer__counter">1:34:27</div>
+            </div>
+
+          </div>
           <img src="img/macbook.png" alt="desktop">
         </div>
         <div class="images__mobile">
-          <div class="content"></div>
+          <div class="content">
+            <div class="timers">
+              <div class="timer one">
+                <div class="timer__name">Проекты</div>
+                <div class="timer__counter">3:55:24</div>
+              </div>
+              <div class="timer two">
+                <div class="timer__name">Спорт</div>
+                <div class="timer__counter">1:05:35</div>
+              </div>
+              <div class="timer three">
+              <div class="timer__name">Отдых</div>
+              <div class="timer__counter">1:34:27</div>
+            </div>
+            </div>
+          </div>
           <img src="img/mobile.png" alt="desktop">
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
 export default {
-  name: "FirstScreen"
+  name: "FirstScreen",
+  data: () => ({
+
+  }),
 }
 </script>
 
@@ -58,6 +89,7 @@ export default {
           font-size: 3rem;
         }
       }
+
       p {
         color: $text-dark;
         font-size: 1.2rem;
@@ -65,6 +97,7 @@ export default {
           font-size: 1rem;
         }
       }
+
       button {
         margin-top: 1rem;
         width: 120px;
@@ -76,6 +109,25 @@ export default {
       flex: 6;
       position: relative;
       height: 90vh;
+
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+
+        .timer {
+          &.one {
+            background-color: $capri;
+          }
+          &.two {
+            background-color: $amethyst;
+          }
+          &.three {
+            background-color: $minion-yellow;
+          }
+        }
+      }
+
+
       &__desktop {
         position: absolute;
         right: -70%;
@@ -83,10 +135,12 @@ export default {
         width: 160%;
         height: 70vh;
         max-height: 900px;
+
         img {
           height: 100%;
           position: relative;
         }
+
         .content {
           @media (max-width: 950px) {
             left: 13%;
@@ -105,18 +159,43 @@ export default {
           }
           background-color: #fff;
           position: absolute;
+          padding: 4rem;
 
           top: 5%;
           left: 7%;
           right: 0;
           bottom: 10%;
+
+          gap: 1rem;
+
+          .timer {
+            height: 170px;
+            width: 170px;
+            padding: 1rem;
+
+            &__name {
+              font-size: 20px;
+            }
+
+            &__counter {
+              font-size: 2rem;
+            }
+
+            &.three {
+              @media (max-width: 430px) {
+                display: none;
+              }
+            }
+          }
         }
       }
+
       &__mobile {
         position: absolute;
         top: 33vh;
         height: 50vh;
         max-height: 600px;
+
         img {
           height: 100%;
           position: relative;
@@ -131,10 +210,38 @@ export default {
           left: 15%;
           right: 15%;
           bottom: 4%;
+          padding: 2rem 1rem;
+          justify-content: space-around;
+
+          .timers {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: .6rem;
+            height: 180px;
+            .timer {
+              height: 70px;
+              padding: 5px;
+              flex: 1;
+              &__name {
+                font-size: 12px;
+                margin-left: 5px;
+              }
+              &__counter {
+                font-size: .9rem;
+              }
+            }
+          }
         }
 
       }
     }
   }
 }
+
 </style>
+
+<!--
+TODO: * Функция преобразователь времени
+      * Директива отслеживающая скролл для анимации
+-->

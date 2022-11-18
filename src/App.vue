@@ -19,8 +19,17 @@
 </template>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Righteous&display=swap');
 
+//@font-face {
+//  font-family: 'Roboto';
+//  src: url('assets/fonts/Roboto/Roboto-Regular.ttf')  format('truetype');
+//}
+//
+//@font-face {
+//  font-family: 'Righteous';
+//  src: url('assets/fonts/Righteous/Righteous-Regular.ttf')  format('truetype');
+//}
 
 /* for Safari */
 html, body {
@@ -33,7 +42,7 @@ html, body {
 html,
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', sans-serif;
 
   #app {
     .logo {
@@ -65,7 +74,7 @@ body {
 
     header {
       padding: 1rem 3rem;
-      border: 1px solid $grey;
+      border-bottom: 1px solid $grey;
       @media (max-width: $breakpoint-small) {
         padding: 1rem 2rem;
       }
@@ -105,6 +114,20 @@ body {
             padding-left: 2rem;
           }
         }
+
+      }
+    }
+
+    .timer {
+      opacity: .9;
+      border-radius: 8px;
+      color: white;
+      position: relative;
+      &__counter {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
 
       }
     }
