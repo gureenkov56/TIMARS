@@ -1,19 +1,37 @@
 <template>
-  <div class="page">
-    <div class="page__first-screen">
-      <div class="text">
-        <h1 class="logo">TIMARS</h1>
-        <p>
-          Трекинг самого дорогого<br/>
-          Трекинг вашего времени
-        </p>
-        <button>
-          Старт
-        </button>
+  <div class="home__first-screen">
+    <div class="text">
+      <h1 class="logo">TIMARS</h1>
+      <p>
+        Трекинг самого дорогого<br/>
+        Трекинг вашего времени
+      </p>
+      <button>
+        Старт
+      </button>
+    </div>
+    <div class="images">
+      <div class="images__desktop">
+        <div class="content">
+          <div class="timer one">
+            <div class="timer__name">Проекты</div>
+            <div class="timer__counter">3:55:23</div>
+          </div>
+          <div class="timer two">
+            <div class="timer__name">Спорт</div>
+            <div class="timer__counter">1:05:35</div>
+          </div>
+          <div class="timer three">
+            <div class="timer__name">Отдых</div>
+            <div class="timer__counter">1:34:27</div>
+          </div>
+
+        </div>
+        <img src="img/macbook.png" alt="desktop">
       </div>
-      <div class="images">
-        <div class="images__desktop">
-          <div class="content">
+      <div class="images__mobile">
+        <div class="content">
+          <div class="timers">
             <div class="timer one">
               <div class="timer__name">Проекты</div>
               <div class="timer__counter">3:55:24</div>
@@ -26,29 +44,9 @@
               <div class="timer__name">Отдых</div>
               <div class="timer__counter">1:34:27</div>
             </div>
-
           </div>
-          <img src="img/macbook.png" alt="desktop">
         </div>
-        <div class="images__mobile">
-          <div class="content">
-            <div class="timers">
-              <div class="timer one">
-                <div class="timer__name">Проекты</div>
-                <div class="timer__counter">3:55:24</div>
-              </div>
-              <div class="timer two">
-                <div class="timer__name">Спорт</div>
-                <div class="timer__counter">1:05:35</div>
-              </div>
-              <div class="timer three">
-                <div class="timer__name">Отдых</div>
-                <div class="timer__counter">1:34:27</div>
-              </div>
-            </div>
-          </div>
-          <img src="img/mobile.png" alt="desktop">
-        </div>
+        <img src="img/mobile.png" alt="desktop">
       </div>
     </div>
   </div>
@@ -57,15 +55,11 @@
 <script>
 export default {
   name: "FirstScreen",
-  data: () => ({}),
 }
 </script>
 
 <style lang="scss" scoped>
-.page {
-  max-width: 1600px;
-  margin: 0 auto;
-
+.home {
   &__first-screen {
     display: flex;
     @media screen and (max-width: $breakpoint-large) {
