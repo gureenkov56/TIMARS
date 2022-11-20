@@ -1,6 +1,8 @@
 <template>
   <HeaderMain/>
-  <router-view/>
+  <section>
+    <router-view/>
+  </section>
   <FooterMain/>
 </template>
 
@@ -12,6 +14,15 @@ export default {
   components: {
     HeaderMain,
     FooterMain
+  },
+  beforeMount() {
+    if (
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ||
+        localStorage.getItem('theme') === 'dark'
+    ) {
+      document.body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
   }
 }
 </script>
@@ -42,6 +53,19 @@ body {
   font-family: 'Inter', sans-serif;
 
   #app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    > section {
+      flex: 1;
+
+      > * {
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+    }
+
     .logo {
       font-family: 'Righteous', cursive;
     }
@@ -72,6 +96,7 @@ body {
     .input-wrapper {
       position: relative;
       padding-top: 1.5rem;
+
       input {
         border: none;
         border-bottom: 2px solid #ccc;
@@ -79,7 +104,9 @@ body {
         color: $text-dark;
         outline: none;
         width: 100%;
-        &~label {
+        background-color: inherit;
+
+        & ~ label {
           position: absolute;
           top: 1.7rem;
           left: 5px;
@@ -87,17 +114,20 @@ body {
           font-size: .9rem;
           transition: all .5s;
         }
-        &:focus~label {
+
+        &:focus ~ label {
           top: .5rem;
           left: 0;
           font-size: .7rem;
         }
       }
+
       label.active {
         top: .5rem;
         left: 0;
         font-size: .7rem;
       }
+
       .error {
         text-align: left;
         font-size: .7rem;
@@ -106,6 +136,7 @@ body {
         visibility: hidden;
         opacity: 0;
         transition: opacity .5s;
+
         &.show {
           visibility: visible;
           opacity: 1;
@@ -120,6 +151,7 @@ body {
       border-radius: 8px;
       color: white;
       position: relative;
+
       &__counter {
         top: 50%;
         left: 50%;
@@ -130,6 +162,15 @@ body {
     }
 
 
+  }
+
+  body.dark {
+    background-color: $dark-mode-bg;
+    color: $dark-mode-text;
+
+    h1, h2, h3, h4, h5, h6, li, p, input {
+      color: $dark-mode-text !important;
+    }
   }
 }
 

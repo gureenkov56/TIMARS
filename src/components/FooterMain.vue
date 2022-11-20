@@ -1,5 +1,5 @@
 <template>
-  <footer v-focus>
+  <footer>
     <span>Made with</span>
     <img src="/img/heart.svg" alt="love">
     <span>by <a id="footerLink" href="https://gureenkov56.github.io">@gureenkov56</a></span>
@@ -30,5 +30,9 @@ footer {
   #footerLink {
     text-decoration: underline;
   }
+}
+
+body.dark footer {
+  background-color: #0A0A0A;
 }
 </style>

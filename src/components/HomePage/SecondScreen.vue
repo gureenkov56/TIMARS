@@ -1,5 +1,5 @@
 <template>
-  <div class="home__second-screen">
+  <section class="home__second-screen">
     <div class="wrapper">
       <div class="form-wrapper">
         <h2>Авторизация</h2>
@@ -47,7 +47,7 @@
         <li>Авторизуйтесь для синхронизации таймеров</li>
       </ul>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

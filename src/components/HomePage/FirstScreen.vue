@@ -1,5 +1,5 @@
 <template>
-  <div class="home__first-screen">
+  <section class="home__first-screen">
     <div class="text">
       <h1 class="logo">TIMARS</h1>
       <p>
@@ -49,7 +49,7 @@
         <img src="img/mobile.png" alt="desktop">
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -246,6 +246,12 @@ export default {
 
       }
     }
+  }
+}
+
+body.dark {
+  .images__desktop .content {
+    background-color: $dark-mode-bg;
   }
 }
 
