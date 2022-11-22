@@ -1,6 +1,6 @@
 <template>
   <section class="home__first-screen">
-    <div class="text">
+    <div class="text" v-show-on-scroll>
       <h1 class="logo">TIMARS</h1>
       <p>
         Трекинг самого дорогого<br/>
@@ -10,7 +10,7 @@
         Старт
       </button>
     </div>
-    <div class="images">
+    <div class="images" v-show-on-scroll>
       <div class="images__desktop">
         <div class="content">
           <div class="timer one">
@@ -61,9 +61,22 @@ export default {
 <style lang="scss" scoped>
 .home {
   &__first-screen {
+    overflow-x: hidden;
     display: flex;
     @media screen and (max-width: $breakpoint-large) {
       display: block;
+    }
+
+    > div {
+      opacity: 0;
+      transform: translateY(100px);
+      transition: all .5s;
+      transition-delay: .5s;
+
+      &.show-on-scroll {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .text {

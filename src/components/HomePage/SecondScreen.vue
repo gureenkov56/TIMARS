@@ -1,6 +1,6 @@
 <template>
   <section class="home__second-screen">
-    <div class="wrapper">
+    <div class="wrapper" v-show-on-scroll>
       <div class="form-wrapper">
         <h2>Авторизация</h2>
         <form>
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="wrapper">
+    <div class="wrapper" v-show-on-scroll>
       <ul>
         <li>Статистика за день, неделю, месяц</li>
         <li>Кастомизация оформления</li>
@@ -77,7 +77,14 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all .5s;
 
+    &.show-on-scroll {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .form-wrapper {
       text-align: center;
