@@ -41,7 +41,6 @@ export default {
 //}
 
 html, body {
-  overflow-x: hidden;
   position: relative;
   width: 100vw;
   height: 100%;
