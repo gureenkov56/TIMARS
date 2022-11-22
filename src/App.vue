@@ -59,6 +59,7 @@ body {
 
     > section {
       flex: 1;
+      position: relative;
 
       > * {
         max-width: 1600px;

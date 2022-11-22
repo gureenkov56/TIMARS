@@ -68,4 +68,7 @@ header {
 
   }
 }
+body.dark header {
+  border-color: #2d2d2d;
+}
 </style>
