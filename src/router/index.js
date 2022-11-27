@@ -15,7 +15,8 @@ const routes = [
   {
     path: '/timers',
     name: 'timers',
-    component: () => import('../views/TimersView.vue')
+    component: () => import('../views/TimersView.vue'),
+    meta: { transition: 'slide-right' },
   },
 ]
 

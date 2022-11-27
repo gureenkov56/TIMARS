@@ -6,9 +6,11 @@
         Трекинг самого дорогого<br/>
         Трекинг вашего времени
       </p>
-      <button>
-        Старт
-      </button>
+      <router-link to="timers">
+        <button>
+          Старт
+        </button>
+      </router-link>
     </div>
     <div class="images" v-show-on-scroll>
       <div class="images__desktop">
@@ -194,6 +196,9 @@ export default {
 
             &__counter {
               font-size: 2rem;
+              @media (max-width: $breakpoint-middle) {
+                font-size: 1.5rem;
+              }
             }
 
             &.three {

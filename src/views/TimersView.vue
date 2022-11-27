@@ -1,45 +1,63 @@
 <template>
-  <div id="timers">
-    <div class="timers__wrapper">
-      <div class="timer one">
-        <div class="timer__name">Проекты</div>
-        <div class="timer__counter">3:55:23</div>
+  <div class="page-wrapper">
+    <HeaderMain/>
+    <section>
+      <div id="timers">
+        <div class="timers__wrapper">
+          <div class="timer one">
+            <div class="timer__name">Проекты</div>
+            <div class="timer__counter">3:55:23</div>
+          </div>
+
+          <div class="timer active">
+            <div class="timer__name">Проекты</div>
+            <div class="timer__counter">3:55:23</div>
+          </div>
+
+          <div class="timer one">
+            <div class="timer__name">Проекты</div>
+            <div class="timer__counter">3:55:23</div>
+          </div>
+
+          <div class="timer plus">
+            <div class="timer__counter">+</div>
+          </div>
+
+          <div class="timer fake"></div>
+          <div class="timer fake"></div>
+          <div class="timer fake"></div>
+        </div>
+
+        <section class="security">
+          <img src="img/security-icon.svg" alt="security" class="security__icon">
+          <div>
+            <p>Пока вы не авторизованы, ваши таймеры хранятся в памяти браузера.<br/>
+              Авторизуйтесь для синхронизации таймеров между устройствами и для более безопасного хранения.</p>
+
+          </div>
+          <div>
+            <button>Войти</button><br/>
+            <button class="grey">Скрыть</button>
+          </div>
+        </section>
       </div>
 
-      <div class="timer active">
-        <div class="timer__name">Проекты</div>
-        <div class="timer__counter">3:55:23</div>
-      </div>
-
-      <div class="timer one">
-        <div class="timer__name">Проекты</div>
-        <div class="timer__counter">3:55:23</div>
-      </div>
-
-      <div class="timer plus">
-        <div class="timer__counter">+</div>
-      </div>
-
-      <div class="timer fake"></div>
-      <div class="timer fake"></div>
-      <div class="timer fake"></div>
-    </div>
-
-    <section class="security">
-      <img src="img/security-icon.svg" alt="security" class="security__icon">
-      <div>
-      <p>Пока вы не авторизованы, ваши таймеры хранятся в памяти браузера.<br/>
-      Авторизуйтесь для синхронизации таймеров между устройствами и для более безопасного хранения.</p>
-
-      </div>
-      <button>Войти</button>
     </section>
+    <FooterMain/>
+
   </div>
 </template>
 
 <script>
+import HeaderMain from "@/components/HeaderMain";
+import FooterMain from "@/components/FooterMain";
+
 export default {
-  name: "TimersView"
+  name: "TimersView",
+  components: {
+    HeaderMain,
+    FooterMain
+  }
 }
 </script>
 
@@ -92,13 +110,28 @@ export default {
   .security {
     max-width: 900px;
     display: flex;
-    //flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
     padding: 10px;
     margin-top: 2rem;
-    position: absolute;
     bottom: 1rem;
+    p {
+      color: #7f7f7f !important;
+    }
+    @media (max-width: $breakpoint-middle) {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    button {
+      margin-bottom: .5rem;
+      width: 130px;
+
+      &.grey {
+        color: #7f7f7f;
+        border-color: #7f7f7f;
+      }
+    }
 
     &__icon {
       width: 40px;

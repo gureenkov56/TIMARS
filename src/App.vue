@@ -1,9 +1,10 @@
 <template>
-  <HeaderMain/>
-  <section>
-    <router-view/>
-  </section>
-  <FooterMain/>
+<!--    <router-view/>-->
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
 </template>
 
 <script>
@@ -46,25 +47,38 @@ html, body {
   height: 100%;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 html,
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
 
   #app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
 
-    > section {
-      flex: 1;
-      position: relative;
+    .page_wrapper > * {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
 
-      > * {
-        max-width: 1600px;
-        margin: 0 auto;
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+
+      > section {
+        flex: 1;
+        position: relative;
       }
     }
+
 
     .logo {
       font-family: 'Righteous', cursive;
@@ -86,6 +100,11 @@ body {
       &.fill {
         background-color: $blue;
         color: white;
+      }
+
+      &.grey {
+        color: $text-light;
+        border-color: $text-light;
       }
     }
 
