@@ -31,15 +31,11 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Righteous&display=swap');
 
-//@font-face {
-//  font-family: 'Roboto';
-//  src: url('assets/fonts/Roboto/Roboto-Regular.ttf')  format('truetype');
-//}
-//
-//@font-face {
-//  font-family: 'Righteous';
-//  src: url('assets/fonts/Righteous/Righteous-Regular.ttf')  format('truetype');
-//}
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
 
 html, body {
   position: relative;
@@ -194,3 +190,15 @@ body {
 }
 
 </style>
+
+<!--
+TODO: 1. Add functional:
+      ** Add timer
+      ** Remove timer
+      ** Change name / color / zeroing timer
+      * ====
+      2. Auth
+      3. Save statistics
+      4. About project page
+      5. Icon for change color theme
+-->

@@ -4,19 +4,16 @@
     <section>
       <div id="timers">
         <div class="timers__wrapper">
-          <div class="timer one">
-            <div class="timer__name">Проекты</div>
-            <div class="timer__counter">3:55:23</div>
-          </div>
 
-          <div class="timer active">
-            <div class="timer__name">Проекты</div>
-            <div class="timer__counter">3:55:23</div>
-          </div>
-
-          <div class="timer one">
-            <div class="timer__name">Проекты</div>
-            <div class="timer__counter">3:55:23</div>
+          <div v-for="timer in timers"
+               :key="timer.id"
+               @click="timerToggle(timer)"
+               :class="{'stopped': !timer.isRun}"
+               :style="{'background-color': timer.color}"
+               class="timer"
+          >
+            <div class="timer__name">{{ timer.name }}</div>
+            <div class="timer__counter">{{ timer.formatted }}</div>
           </div>
 
           <div class="timer plus">
@@ -28,18 +25,29 @@
           <div class="timer fake"></div>
         </div>
 
-        <section class="security">
-          <img src="img/security-icon.svg" alt="security" class="security__icon">
-          <div>
-            <p>Пока вы не авторизованы, ваши таймеры хранятся в памяти браузера.<br/>
-              Авторизуйтесь для синхронизации таймеров между устройствами и для более безопасного хранения.</p>
+        <Transition>
+          <section v-if="timersViewAuthMessage"
+                   class="security"
+          >
+            <img src="img/security-icon.svg" alt="security" class="security__icon">
+            <div>
+              <p>Пока вы не авторизованы, ваши таймеры хранятся в памяти браузера.<br/>
+                Авторизуйтесь для синхронизации таймеров между устройствами и для более безопасного хранения.</p>
 
-          </div>
-          <div>
-            <button>Войти</button><br/>
-            <button class="grey">Скрыть</button>
-          </div>
-        </section>
+            </div>
+            <div>
+              <button>Войти</button>
+              <br/>
+              <button @click="timersViewAuthMessage = false"
+                      class="grey"
+              >
+                Скрыть
+              </button>
+            </div>
+          </section>
+
+        </Transition>
+
       </div>
 
     </section>
@@ -52,16 +60,118 @@
 import HeaderMain from "@/components/HeaderMain";
 import FooterMain from "@/components/FooterMain";
 
+
 export default {
   name: "TimersView",
   components: {
     HeaderMain,
     FooterMain
+  },
+  data: () => ({
+    /******
+     * count - накопившееся время в таймере
+     * startBy - показывает старт (timeStamp) для запущенного таймера
+     *
+     * Если таймер при загрузке страницы остановлен, то расчет ведется от count
+     *
+     * Если таймер при загрузке страницы запущен, то расчет ведем от startBy,
+     * чтобы посчитать, как давно таймер был запущен
+     */
+    timers: [
+      {
+        id: 1,
+        name: 'Программирование',
+        color: '#9b5de5ff',
+        count: 10,
+        formatted: 0,
+        isRun: true,
+        startBy: 1669552364122,
+      },
+      {
+        id: 2,
+        name: 'Прогулка',
+        color: '#00bbf9ff',
+        count: 9900000,
+        formatted: '2:45:00',
+        isRun: false,
+        startBy: 0,
+      }
+    ],
+    timersViewAuthMessage: !localStorage.getItem('timersViewAuthMessage')
+  }),
+  computed: {
+    runTimers() {
+      return this.timers.filter(t => t.isRun)
+    }
+  },
+  methods: {
+    formattedTime(now, res) {
+      let h = ~~(res / (1000 * 60 * 60));
+      res -= 1000 * 60 * 60 * h;
+
+      let m = ~~(res / (1000 * 60));
+      res -= 1000 * 60 * m;
+
+      let s = ~~(res / 1000);
+
+      return `${h}:${this.zeroFor10Less(m)}:${this.zeroFor10Less(s)}`
+    },
+    zeroFor10Less(n) {
+      return (n < 10) ? '0' + n : n
+    },
+    timerToggle(timer) {
+      if (!timer.isRun) {
+        timer.startBy = Date.now();
+      }
+      timer.isRun = !timer.isRun
+      this.saveTimers();
+    },
+    saveTimers() {
+      localStorage.setItem('timersData', JSON.stringify(this.timers))
+    }
+  },
+  watch: {
+    timersViewAuthMessage() {
+      localStorage.setItem('timersViewAuthMessage', 'hide');
+    }
+  },
+  created() {
+    // if (auth)
+    if (false) {
+      // getData by BD
+    } else {
+      const localStorageTimers = localStorage.getItem('timersData');
+      if (localStorageTimers) {
+        this.timers = JSON.parse(localStorageTimers);
+      }
+    }
+
+    this.runTimers.forEach(t => t.count += Date.now() - t.startBy);
+    this.timers.forEach(t => t.formatted = this.formattedTime(Date.now(), t.count))
+
+    setInterval(() => {
+      let now = Date.now();
+
+      this.runTimers.forEach(t => {
+        t.count += 1000;
+        t.formatted = this.formattedTime(now, t.count);
+      })
+    }, 1000);
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
 #timers {
   max-width: 1000px;
   margin: 2rem auto;
@@ -69,25 +179,34 @@ export default {
 
   .timers__wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
     gap: 1rem;
 
     .timer {
-      background-color: #ccc;
       padding: 1rem;
       height: 150px;
-      width: 150px;
+      min-width: 150px;
       cursor: pointer;
-      opacity: .7;
       transition: all .3s;
+      flex: 1;
 
-      &.active {
-        opacity: 1;
+      &.stopped {
+        background-color: #848484 !important;
       }
 
       &:hover {
         transform: scale(1.04);
+      }
+
+      @media (hover: none) {
+        &:hover {
+          transform: none;
+        }
+      }
+
+      &__name {
+        word-wrap: break-word;
       }
 
       &.plus {
@@ -100,6 +219,7 @@ export default {
       }
 
       &.fake {
+        display: none;
         visibility: hidden;
         height: 0;
         padding: 0;
@@ -115,9 +235,11 @@ export default {
     padding: 10px;
     margin-top: 2rem;
     bottom: 1rem;
+
     p {
       color: #7f7f7f !important;
     }
+
     @media (max-width: $breakpoint-middle) {
       flex-direction: column;
       text-align: center;
