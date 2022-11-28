@@ -35,7 +35,9 @@
         </form>
         <div class="or">или</div>
         <div>
-          <button>Войти как гость</button>
+          <router-link to="timers">
+            <button>Войти как гость</button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -123,6 +125,7 @@ export default {
           color: $text-light;
           font-size: .8rem;
           margin-top: .5rem;
+
           span {
             color: $blue;
           }

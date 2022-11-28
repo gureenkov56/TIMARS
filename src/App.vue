@@ -1,9 +1,10 @@
 <template>
-  <HeaderMain/>
-  <section>
-    <router-view/>
-  </section>
-  <FooterMain/>
+<!--    <router-view/>-->
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
 </template>
 
 <script>
@@ -30,20 +31,25 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Righteous&display=swap');
 
-//@font-face {
-//  font-family: 'Roboto';
-//  src: url('assets/fonts/Roboto/Roboto-Regular.ttf')  format('truetype');
-//}
-//
-//@font-face {
-//  font-family: 'Righteous';
-//  src: url('assets/fonts/Righteous/Righteous-Regular.ttf')  format('truetype');
-//}
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
 
 html, body {
   position: relative;
   width: 100vw;
   height: 100%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 html,
@@ -52,19 +58,23 @@ body {
   font-family: 'Inter', sans-serif;
 
   #app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
 
-    > section {
-      flex: 1;
-      position: relative;
+    .page_wrapper > * {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
 
-      > * {
-        max-width: 1600px;
-        margin: 0 auto;
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+
+      > section {
+        flex: 1;
+        position: relative;
       }
     }
+
 
     .logo {
       font-family: 'Righteous', cursive;
@@ -86,6 +96,11 @@ body {
       &.fill {
         background-color: $blue;
         color: white;
+      }
+
+      &.grey {
+        color: $text-light;
+        border-color: $text-light;
       }
     }
 
@@ -175,3 +190,15 @@ body {
 }
 
 </style>
+
+<!--
+TODO: 1. Add functional:
+      ** Add timer
+      ** Remove timer
+      ** Change name / color / zeroing timer
+      * ====
+      2. Auth
+      3. Save statistics
+      4. About project page
+      5. Icon for change color theme
+-->

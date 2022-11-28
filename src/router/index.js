@@ -15,12 +15,20 @@ const routes = [
   {
     path: '/timers',
     name: 'timers',
-    component: () => import('../views/TimersView.vue')
+    component: () => import('../views/TimersView.vue'),
+    meta: { transition: 'slide-right' },
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ left: 0, top: 0 })
+      }, 500)
+    })
+  },
   routes
 })
 
