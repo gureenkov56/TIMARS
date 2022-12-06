@@ -1,5 +1,6 @@
 <template>
   <footer>
+    <ModalWrapper/>
     <span>Made with</span>
     <img src="/img/heart.svg" alt="love">
     <span>by <a id="footerLink" href="https://gureenkov56.github.io">@gureenkov56</a></span>
@@ -7,8 +8,11 @@
 </template>
 
 <script>
+import ModalWrapper from "@/components/Modals/ModalWrapper";
+
 export default {
-  name: "FooterMain"
+  name: "FooterMain",
+  components: {ModalWrapper}
 }
 </script>
 

@@ -16,7 +16,9 @@
             <div class="timer__counter">{{ timer.formatted }}</div>
           </div>
 
-          <div class="timer plus">
+          <div @click="openModalCreateTimer"
+              class="timer plus"
+          >
             <div class="timer__counter">+</div>
           </div>
 
@@ -52,13 +54,13 @@
 
     </section>
     <FooterMain/>
-
   </div>
 </template>
 
 <script>
 import HeaderMain from "@/components/HeaderMain";
 import FooterMain from "@/components/FooterMain";
+import store from "@/store";
 
 
 export default {
@@ -97,7 +99,7 @@ export default {
         startBy: 0,
       }
     ],
-    timersViewAuthMessage: !localStorage.getItem('timersViewAuthMessage')
+    timersViewAuthMessage: !localStorage.getItem('timersViewAuthMessage'),
   }),
   computed: {
     runTimers() {
@@ -128,6 +130,9 @@ export default {
     },
     saveTimers() {
       localStorage.setItem('timersData', JSON.stringify(this.timers))
+    },
+    openModalCreateTimer() {
+      store.commit('setOpenedModal', 'settings');
     }
   },
   watch: {
