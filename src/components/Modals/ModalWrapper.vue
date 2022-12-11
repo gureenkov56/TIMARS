@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     closeModal() {
-      store.commit('closeModal');
+      store.commit('CLOSE_MODAL');
     }
   }
 }

@@ -18,41 +18,74 @@
       <div class="colors">
 
         <div>
-          <input type="radio" id="color1" name="colors" hidden>
+          <input v-model="newColor"
+                 value="color1"
+                 type="radio"
+                 id="color1"
+                 name="colors"
+                 hidden
+                 checked
+          >
           <img src="/img/sign-ok.svg" alt="OK">
           <label for="color1"></label>
         </div>
 
         <div>
-          <input type="radio" id="color2" name="colors" hidden>
+          <input v-model="newColor"
+                 value="color2"
+                 type="radio"
+                 id="color2"
+                 name="colors"
+                 hidden
+          >
           <img src="/img/sign-ok.svg" alt="OK">
           <label for="color2"></label>
         </div>
 
         <div>
-          <input type="radio" id="color3" name="colors" hidden>
+          <input v-model="newColor"
+                 value="color3"
+                 type="radio"
+                 id="color3"
+                 name="colors"
+                 hidden
+          >
           <img src="/img/sign-ok.svg" alt="OK">
           <label for="color3"></label>
         </div>
 
         <div>
-          <input type="radio" id="color4" name="colors" hidden>
+          <input v-model="newColor"
+                 value="color4"
+                 type="radio"
+                 id="color4"
+                 name="colors"
+                 hidden
+          >
           <img src="/img/sign-ok.svg" alt="OK">
           <label for="color4"></label>
         </div>
       </div>
 
-      <button @click.prevent>ОК</button>
+      <button @click.prevent="pushNewTimer">ОК</button>
     </form>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "TimerSetting",
   data: () => ({
-    newName: ''
-  })
+    newName: '',
+    newColor: ''
+  }),
+  methods: {
+    pushNewTimer() {
+      // todo: bring timers in store
+      // store.commit('regNewTimer', {name: this.newName, color: this.newColor});
+    }
+  }
 
 }
 </script>
@@ -85,7 +118,7 @@ form {
         transition: opacity .5s;
       }
 
-      input[type='radio']:checked ~img {
+      input[type='radio']:checked ~ img {
         opacity: 1;
       }
 
@@ -115,10 +148,6 @@ form {
       }
 
     }
-
-
-
-
 
 
   }
