@@ -5,7 +5,7 @@
       <div id="timers">
         <div class="timers__wrapper">
 
-          <div v-for="timer in timers"
+          <div v-for="timer in $store.state.timers"
                :key="timer.id"
                @click="timerToggle(timer)"
                :class="{'stopped': !timer.isRun}"
@@ -64,47 +64,22 @@ import store from "@/store";
 
 
 export default {
+  /*
+  TODO: * Настроить таймер (цвет, обнулить, удалить)
+        * Добавить таймер 
+  */
   name: "TimersView",
   components: {
     HeaderMain,
     FooterMain
   },
   data: () => ({
-    /******
-     * count - накопившееся время в таймере
-     * startBy - показывает старт (timeStamp) для запущенного таймера
-     *
-     * Если таймер при загрузке страницы остановлен, то расчет ведется от count
-     *
-     * Если таймер при загрузке страницы запущен, то расчет ведем от startBy,
-     * чтобы посчитать, как давно таймер был запущен
-     */
-    timers: [
-      {
-        id: 1,
-        name: 'Программирование',
-        color: '#9b5de5ff',
-        count: 10,
-        formatted: 0,
-        isRun: true,
-        startBy: 1669552364122,
-      },
-      {
-        id: 2,
-        name: 'Прогулка',
-        color: '#00bbf9ff',
-        count: 9900000,
-        formatted: '2:45:00',
-        isRun: false,
-        startBy: 0,
-      }
-    ],
     timersViewAuthMessage: !localStorage.getItem('timersViewAuthMessage'),
   }),
   computed: {
     runTimers() {
       return this.timers.filter(t => t.isRun)
-    }
+    },
   },
   methods: {
     formattedTime(now, res) {
@@ -122,11 +97,8 @@ export default {
       return (n < 10) ? '0' + n : n
     },
     timerToggle(timer) {
-      if (!timer.isRun) {
-        timer.startBy = Date.now();
-      }
-      timer.isRun = !timer.isRun
-      this.saveTimers();
+      store.commit('TOGGLE_TIMER', timer);
+      store.dispatch('save_timers', timer.id);
     },
     saveTimers() {
       localStorage.setItem('timersData', JSON.stringify(this.timers))
@@ -138,29 +110,25 @@ export default {
   watch: {
     timersViewAuthMessage() {
       localStorage.setItem('timersViewAuthMessage', 'hide');
-    }
+    },
+    
   },
   created() {
     // if (auth)
     // if (false) {
       // getData by BD
+      // save timers in local storage
     // } else {
       const localStorageTimers = localStorage.getItem('timersData');
       if (localStorageTimers) {
-        this.timers = JSON.parse(localStorageTimers);
+        store.commit('SET_TIMERS', JSON.parse(localStorageTimers));
       }
     // }
 
-    this.runTimers.forEach(t => t.count += Date.now() - t.startBy);
-    this.timers.forEach(t => t.formatted = this.formattedTime(Date.now(), t.count))
+    store.dispatch('calc_count_for_running_timers');
 
     setInterval(() => {
-      let now = Date.now();
-
-      this.runTimers.forEach(t => {
-        t.count += 1000;
-        t.formatted = this.formattedTime(now, t.count);
-      })
+      store.dispatch('plus_sec_to_timers');
     }, 1000);
   }
 }
