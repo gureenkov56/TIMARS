@@ -132,7 +132,7 @@ export default {
       localStorage.setItem('timersData', JSON.stringify(this.timers))
     },
     openModalCreateTimer() {
-      store.commit('setOpenedModal', 'settings');
+      store.commit('OPEN_MODAL', 'settings');
     }
   },
   watch: {
@@ -142,14 +142,14 @@ export default {
   },
   created() {
     // if (auth)
-    if (false) {
+    // if (false) {
       // getData by BD
-    } else {
+    // } else {
       const localStorageTimers = localStorage.getItem('timersData');
       if (localStorageTimers) {
         this.timers = JSON.parse(localStorageTimers);
       }
-    }
+    // }
 
     this.runTimers.forEach(t => t.count += Date.now() - t.startBy);
     this.timers.forEach(t => t.formatted = this.formattedTime(Date.now(), t.count))

@@ -8,11 +8,11 @@ export default createStore({
   getters: {
   },
   mutations: {
-    setOpenedModal(state, name) {
+    OPEN_MODAL(state, name) {
       state.isModalOpen = true;
       state.openedModal = name;
     },
-    closeModal(state) {
+    CLOSE_MODAL(state) {
       state.isModalOpen = false;
     }
   },
