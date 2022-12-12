@@ -9,22 +9,24 @@
             <img src="/img/close.svg" alt="close">
           </button>
         </div>
-        <TimerSettings v-if="openedModal === 'settings'"/>
+        <TimerSettings  v-if="openedModal === 'settings'" />
+        <TimerCreate    v-if="openedModal === 'create'"   />
       </div>
     </div>
   </Transition>
 </template>
 
 <script>
-
 import TimerSettings from "@/components/Modals/TimerSettings";
+import TimerCreate from "@/components/Modals/TimerCreate";
 import {mapState} from "vuex";
 import store from "@/store";
 
 export default {
   name: 'ModalWrapper',
   components: {
-    TimerSettings
+    TimerSettings,
+    TimerCreate
   },
   computed: {
     ...mapState(['isModalOpen', 'openedModal']),

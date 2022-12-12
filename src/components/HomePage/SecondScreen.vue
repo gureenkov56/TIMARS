@@ -17,7 +17,7 @@
           </div>
           <div class="input-wrapper">
             <input v-model="password"
-                   type="text"
+                   type="password"
                    id="password"
             >
             <label :class="{'active': password.length}"
@@ -27,7 +27,11 @@
             <div class="error">Ошибка в логине</div>
           </div>
           <div>
-            <button class="fill">Вход</button>
+            <button @click.prevent="submitAuthForm"
+                    class="fill"
+            >
+              Вход
+            </button>
           </div>
           <div class="ask">
             Еще нет аккаунта? <span>Регистрация</span>
@@ -58,7 +62,13 @@ export default {
   data: () => ({
     login: '',
     password: ''
-  })
+    // ! autofill
+  }),
+  methods: {
+    submitAuthForm() {
+      console.log(this.login, this.password);
+    }
+  }
 }
 </script>
 

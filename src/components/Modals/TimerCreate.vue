@@ -1,6 +1,6 @@
 <template>
   <div class="ModalTimerSettings">
-    <h2>Настроить таймер</h2>
+    <h2>Новый таймер</h2>
     <form>
       <div class="input-wrapper">
         <input v-model="newName"

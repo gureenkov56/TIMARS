@@ -113,7 +113,19 @@ body {
       padding-top: 1.5rem;
 
       input {
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover, 
+        &:-webkit-autofill:focus {
+          -webkit-text-fill-color: $text-dark;
+          & ~ label {
+            top: .5rem;
+            left: 0;
+            font-size: .7rem;
+          }
+        }
+
         border: none;
+        border-radius: 0;
         border-bottom: 2px solid #ccc;
         font-size: 1.2rem;
         color: $text-dark;
@@ -185,6 +197,15 @@ body {
 
     h1, h2, h3, h4, h5, h6, li, p, input {
       color: $dark-mode-text !important;
+    }
+
+    input {
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover, 
+      &:-webkit-autofill:focus {
+        -webkit-text-fill-color: $dark-mode-text !important;
+        -webkit-box-shadow: 0 0 0px 1000px $dark-mode-bg inset;
+      }
     }
   }
 }
